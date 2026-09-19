@@ -1,15 +1,14 @@
-name: Publish to npm
+name: Build Package
 
 on:
   release:
     types: [created]
 
 permissions:
-  contents: read
-  id-token: write  # Required for OIDC trusted publishing
+  contents: write
 
 jobs:
-  publish:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -17,9 +16,22 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-          registry-url: "https://registry.npmjs.org"
 
       - run: npm ci
       - run: npm run build
-      - run: npm publish --access public
-        # Trusted publishing handles authentication via OIDC - no token needed
+
+      - name: Set version from release tag
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "Setting version to: $VERSION"
+          npm version "$VERSION" --no-git-tag-version
+
+      - name: Create package tarball
+        run: npm pack
+
+      - name: Upload package artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: npm-package
+          path: "*.tgz"
+          retention-days: 30
