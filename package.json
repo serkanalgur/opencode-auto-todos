@@ -1,6 +1,6 @@
 {
   "name": "opencode-auto-todos",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "OpenCode plugin that automatically adds custom todos to every feature's task list",
   "main": "dist/plugin.js",
   "types": "dist/plugin.d.ts",
