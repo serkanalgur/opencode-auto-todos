@@ -1,5 +1,7 @@
 # opencode-auto-todos
 
+[![npm version](https://img.shields.io/npm/v/opencode-auto-todos.svg)](https://www.npmjs.com/package/opencode-auto-todos)
+
 An [OpenCode](https://opencode.ai) plugin that automatically appends custom todos to every task list. Define your standard workflow items once, and they'll be added to every `todowrite` call automatically.
 
 ## Use Cases
@@ -11,26 +13,12 @@ An [OpenCode](https://opencode.ai) plugin that automatically appends custom todo
 
 ## Installation
 
-### Option 1: Local plugin (recommended)
-
-Copy `plugin.ts` into your project:
-
 ```bash
-# From the repo root
-cp plugin.ts /path/to/your/project/.opencode/plugin/auto-todos.ts
+# In your project directory
+npm install --save-dev opencode-auto-todos
 ```
 
-### Option 2: Reference from external path
-
-In your `opencode.json`:
-
-```json
-{
-  "plugin": ["/absolute/path/to/opencode-auto-todos/plugin.ts"]
-}
-```
-
-### Option 3: npm (if published)
+Then add to your `opencode.json`:
 
 ```json
 {
@@ -84,36 +72,26 @@ Create an `auto-todos.json` file in your project root or inside `.opencode/`:
 3. It appends your configured todos to the list (unless they already exist)
 4. The model then sees the complete list including your standard items
 
-## Example: Version Bump + GitHub Workflow
+## Example
+
+With this config:
 
 ```json
 {
   "todos": [
-    {
-      "content": "Version bump - update version in package.json or version file",
-      "priority": "medium",
-      "match": "version bump"
-    },
-    {
-      "content": "GitHub workflow - create branch, commit changes, open PR",
-      "priority": "medium",
-      "match": "github workflow"
-    }
+    { "content": "Version bump", "match": "version" },
+    { "content": "Create branch, commit, open PR", "match": "github" }
   ]
 }
 ```
 
-With this config, every time you start a new feature, the agent's todo list will automatically include:
+Every time you start a new feature, the agent's todo list will automatically include:
 
 ```
 ✓ [your feature-specific todos]
-☐ Version bump - update version in package.json or version file
-☐ GitHub workflow - create branch, commit changes, open PR
+☐ Version bump
+☐ Create branch, commit, open PR
 ```
-
-## Restart Required
-
-After adding or modifying the plugin or config, **restart OpenCode** for changes to take effect. OpenCode loads plugins and config once at startup.
 
 ## License
 
