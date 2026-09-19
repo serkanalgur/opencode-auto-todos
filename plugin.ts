@@ -42,8 +42,8 @@ function loadConfig(projectDir: string): AutoTodosConfig | null {
   return null
 }
 
-export default (async ({ project }) => {
-  const config = loadConfig(project.path)
+export default (async ({ directory }) => {
+  const config = loadConfig(directory)
 
   if (!config || !config.todos || config.todos.length === 0) {
     // No config found or empty todos - register nothing

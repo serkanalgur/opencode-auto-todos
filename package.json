@@ -2,20 +2,42 @@
   "name": "opencode-auto-todos",
   "version": "1.0.0",
   "description": "OpenCode plugin that automatically adds custom todos to every feature's task list",
-  "main": "plugin.ts",
+  "main": "dist/plugin.js",
+  "types": "dist/plugin.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "version": "npm run build"
+  },
   "keywords": [
     "opencode",
     "opencode-plugin",
+    "plugin",
     "todos",
-    "automation"
+    "automation",
+    "task-list",
+    "workflow"
   ],
   "author": "serkanalgur",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/serkanalgur/opencode-auto-todos"
+    "url": "git+https://github.com/serkanalgur/opencode-auto-todos.git"
   },
+  "bugs": {
+    "url": "https://github.com/serkanalgur/opencode-auto-todos/issues"
+  },
+  "homepage": "https://github.com/serkanalgur/opencode-auto-todos#readme",
   "peerDependencies": {
     "@opencode-ai/plugin": "*"
+  },
+  "devDependencies": {
+    "@opencode-ai/plugin": "*",
+    "@types/node": "^26.6.2",
+    "typescript": "^5.0.0"
   }
 }
