@@ -6,7 +6,7 @@ on:
 
 permissions:
   contents: read
-  id-token: write
+  id-token: write  # Required for OIDC trusted publishing
 
 jobs:
   publish:
@@ -22,5 +22,4 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        # No NODE_AUTH_TOKEN needed - OIDC handles authentication
