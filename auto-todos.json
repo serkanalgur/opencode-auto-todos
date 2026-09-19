@@ -1,0 +1,16 @@
+{
+  "todos": [
+    {
+      "content": "Version bump - update version in package.json or version file",
+      "priority": "medium",
+      "match": "version bump"
+    },
+    {
+      "content": "GitHub workflow - create branch, commit changes, open PR",
+      "priority": "medium",
+      "match": "github workflow"
+    }
+  ],
+  "always": false,
+  "deduplicate": true
+}

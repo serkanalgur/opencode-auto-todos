@@ -1,0 +1,21 @@
+{
+  "name": "opencode-auto-todos",
+  "version": "1.0.0",
+  "description": "OpenCode plugin that automatically adds custom todos to every feature's task list",
+  "main": "plugin.ts",
+  "keywords": [
+    "opencode",
+    "opencode-plugin",
+    "todos",
+    "automation"
+  ],
+  "author": "serkanalgur",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/serkanalgur/opencode-auto-todos"
+  },
+  "peerDependencies": {
+    "@opencode-ai/plugin": "*"
+  }
+}
