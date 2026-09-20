@@ -7,6 +7,13 @@ interface AutoTodo {
   priority?: "high" | "medium" | "low"
   /** Optional prefix to match existing todos and avoid duplicates */
   match?: string
+  /** 
+   * Position where this todo should be inserted.
+   * - "first": insert at the beginning
+   * - "last": insert at the end (default)
+   * - number: insert at that 1-based index (e.g., 1 = first, 2 = second)
+   */
+  order?: "first" | "last" | number
 }
 
 interface AutoTodosConfig {
@@ -74,11 +81,25 @@ export default (async ({ directory }) => {
           if (alreadyExists) continue
         }
 
-        existingTodos.push({
+        const newTodo = {
           content: autoTodo.content,
           status: "pending",
           priority: autoTodo.priority || "medium",
-        })
+        }
+
+        // Insert based on order
+        const order = autoTodo.order
+        if (order === "first") {
+          existingTodos.unshift(newTodo)
+        } else if (order === "last" || order === undefined) {
+          existingTodos.push(newTodo)
+        } else if (typeof order === "number") {
+          // 1-based index: 1 = first position, 2 = second, etc.
+          const index = Math.max(0, Math.min(order - 1, existingTodos.length))
+          existingTodos.splice(index, 0, newTodo)
+        } else {
+          existingTodos.push(newTodo)
+        }
       }
     },
   }
